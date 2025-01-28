@@ -1,18 +1,19 @@
 const token = "7384403490:AAE9Rwqe6b1qOlAYZJgNdxhsGMTOECUyw98";
 
-const TelegramBot = require("node-telegram-bot-api");
 const webAppUrl = "https://tgwebapp29.netlify.app";
+const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
 
 
-const bot = new TelegramBot(token, { polling: true });
+
+const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-bot.on("message", async (msg) => {
+bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
 
@@ -33,6 +34,7 @@ bot.on("message", async (msg) => {
       }
     })
   }
+
   if(msg?.web_app_data?.data) {
     try {
       const data = JSON.parse(msg?.web_app_data?.data)
@@ -69,4 +71,4 @@ app.post('/web-data', async (req, res) => {
 
 const PORT = 8000;
 
-app.listen(PORT, () => {console.log('server started on PORT ' + PORT + '!')});
+app.listen(PORT, () => console.log('server started on PORT ' + PORT))
